@@ -1,5 +1,9 @@
 const mysql = require('mysql2');
 
+/**
+ * Ensure the db is up and running before operations begin.
+ * @returns Promise<resolve, reject>
+ */
 function checkConnection() {
   console.log(`Connection to DB: ${process.env.MYSQL_HOST}:${process.env.MYSQL_NAME} with ${process.env.MYSQL_USER}`);
 

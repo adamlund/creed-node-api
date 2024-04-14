@@ -1,7 +1,7 @@
 const Knex = require('knex');
 const fs = require('fs');
 
-// Path to JSON data file with podcasts array
+// Expect path to data file
 const dataPath = process.argv[2];
 
 // Setup db conn
@@ -36,6 +36,11 @@ function filterColumns(podcast, columnNames) {
   return reduced;
 }
 
+/** 
+ * Load fixture data so the api has something to display.
+ * Ordinarily this would be an ETL/ELT process and can be used as such.
+ * This file will UPDATE existing ids in the tables,
+*/
 async function loadDataFromFile(filePath) {
 
   try {
