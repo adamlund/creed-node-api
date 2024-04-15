@@ -1,49 +1,44 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Creed Interactive Node Developer Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A simple, straighforward, minimalist NestJS API example to illustrate working in NodeJS projects. 
+- Challenge Response By - [Adam Lund](https://github.com/adamlund)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Stack
+* [Docker](https://www.docker.com/get-started/) for containerized development of the app and its dependencies.
+* [NestJS](https://github.com/nestjs/nest) API server.
+* [MySQL](https://www.mysql.com/) db.
+* [Knex](https://knexjs.org/) and [Objection](https://vincit.github.io/objection.js/) to provide a flexible ORM for table modelling, entity management, and queries.
 
-## Description
+## Install & Run
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+A `Makefile` is provided for convenience, but you can also directly access the `docker compose` commands directly.
 
 ```bash
 $ npm install
+$ make build    # docker compose up --build
+
+# In a second terminal...
+$ make migrate  # add tables & schema
+$ make data     # insert/update sample data
 ```
 
-## Running the app
+## Query the API
 
-```bash
-# development
-$ npm run start
+With app running `GET` for the following route.
 
-# watch mode
-$ npm run start:dev
+[`http://localhost:3000/podcasts/best_podcasts`](http://localhost:3000/podcasts/best_podcasts)
 
-# production mode
-$ npm run start:prod
-```
+Supported route params
+
+| Param   | Type  | Required | Valid Values |
+| ------- | ----- | -------- | ------------ |
+| page    | int   | no |  1-n |
+| page_size    | int   | no |  5-50 |
+| genre_id   | int   | no | 67,140, etc |
+| safe_mode   | int   | no | 0 : 1 |
+| region   | string   | no | us, uk, ca, au |
+
+See [swagger page](http://localhost:3000/api) for complete docs.
 
 ## Test
 
@@ -51,23 +46,10 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
+
+# e2e tests run using docker
+$ make e2e
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
