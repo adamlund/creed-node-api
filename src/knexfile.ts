@@ -1,5 +1,8 @@
 import type { Knex } from 'knex';
 
+/**
+ * Boilerplate Knex db setup for MySQL
+ */
 const config: { [key: string]: Knex.Config } = {
   development: {
     client: 'mysql2',
