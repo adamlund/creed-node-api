@@ -59,10 +59,7 @@ export class PodcastsService {
     const queryBuilder = this.PodcastClass.query();
     applyDomainFilters(queryBuilder, query);
 
-    let queryResult = await queryBuilder.page(
-      pageNumber - 1,
-      pageSize,
-    );
+    let queryResult = await queryBuilder.page(pageNumber - 1, pageSize);
     let actualPageNumber = pageNumber;
 
     const totalPages = Math.ceil(queryResult.total / pageSize);
@@ -70,10 +67,7 @@ export class PodcastsService {
     // If paged beyond the maximum, provide the data from last page rather than zero results
     if (pageNumber > totalPages) {
       actualPageNumber = Math.max(totalPages, 1);
-      queryResult = await queryBuilder.page(
-        actualPageNumber - 1,
-        pageSize,
-      );
+      queryResult = await queryBuilder.page(actualPageNumber - 1, pageSize);
     }
 
     const paging = pagingResponse(
