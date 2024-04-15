@@ -14,23 +14,27 @@ describe('PodcastsService', () => {
       findById: jest.fn().mockReturnThis(),
       where: jest.fn().mockReturnThis(),
       whereRaw: jest.fn().mockReturnThis(),
-      page: jest.fn().mockImplementation((pageNumber, pageSize) => Promise.resolve({
-        total: 1,
-        results: [{ title: 'Tech Today' }],
-      })),
-      applyFilter: jest.fn().mockReturnThis(), // If you have custom methods like this
+      page: jest.fn().mockImplementation((pageNumber, pageSize) =>
+        Promise.resolve({
+          total: 1,
+          results: [{ title: 'Tech Today' }],
+        }),
+      ),
     };
 
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         PodcastsService,
-        { provide: 'PodcastModel', useValue: { query: () => mockQueryBuilder } },
+        {
+          provide: 'PodcastModel',
+          useValue: { query: () => mockQueryBuilder },
+        },
         { provide: 'GenreModel', useValue: { query: () => mockQueryBuilder } },
       ],
     }).compile();
 
     service = module.get<PodcastsService>(PodcastsService);
-    service.fetchGenre = jest.fn();  // Mock fetchGenre method
+    service.fetchGenre = jest.fn();
   });
 
   describe('fetchPodcasts', () => {
@@ -49,10 +53,14 @@ describe('PodcastsService', () => {
       const mockQuery = { genre_id: 999, page: 1 };
 
       jest.spyOn(service, 'fetchGenre').mockImplementation(() => {
-        throw new BadRequestException(`Unsupported genre_id provided, genre_id=${mockQuery.genre_id}`);
+        throw new BadRequestException(
+          `Unsupported genre_id provided, genre_id=${mockQuery.genre_id}`,
+        );
       });
 
-      await expect(service.fetchPodcasts(mockQuery)).rejects.toThrow(BadRequestException);
+      await expect(service.fetchPodcasts(mockQuery)).rejects.toThrow(
+        BadRequestException,
+      );
     });
   });
 });

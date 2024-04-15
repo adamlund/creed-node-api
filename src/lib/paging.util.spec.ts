@@ -2,7 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { pagingResponse, PagingDefinition } from './paging.util';
 
 describe('Paging utils', () => {
-
   describe('pagination settings', () => {
     it('should handle a single page of results correctly', () => {
       const result = pagingResponse(15, 15, 1, 15);
@@ -42,7 +41,6 @@ describe('Paging utils', () => {
         has_previous: true,
       };
       expect(result2).toEqual(expected2);
-      
     });
 
     it('should handle zero results correctly', () => {
@@ -74,15 +72,21 @@ describe('Paging utils', () => {
     });
 
     it('should handle zero page size (expect error)', () => {
-      expect(() => pagingResponse(100, 100, 1, 0)).toThrow('pageSize must be greater than zero.');
+      expect(() => pagingResponse(100, 100, 1, 0)).toThrow(
+        'pageSize must be greater than zero.',
+      );
     });
 
     it('should handle negative page size (expect error)', () => {
-      expect(() => pagingResponse(100, 100, 1, -10)).toThrow('pageSize must be greater than zero.');
+      expect(() => pagingResponse(100, 100, 1, -10)).toThrow(
+        'pageSize must be greater than zero.',
+      );
     });
 
     it('should handle negative page number (expect error)', () => {
-      expect(() => pagingResponse(100, 100, -1, 10)).toThrow('page must be a positive integer.');
+      expect(() => pagingResponse(100, 100, -1, 10)).toThrow(
+        'page must be a positive integer.',
+      );
     });
   });
 });
