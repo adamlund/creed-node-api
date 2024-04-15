@@ -13,10 +13,4 @@ export class AppController {
       dbConnection: connected,
     };
   }
-
-  @Get('ready')
-  @Header('Access-Control-Allow-Origin', '*')
-  async isReady(): Promise<object> {
-    return {};
-  }
 }
