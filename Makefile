@@ -10,4 +10,4 @@ data:
 	docker compose exec web-api sh -c "npm run data"
 
 e2e:
-	docker compose exec web-api sh -c "npm run test:e2e --detectOpenHandles"
+	docker compose exec web-api sh -c "npm run test:e2e"
