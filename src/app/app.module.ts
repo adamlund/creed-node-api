@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { PodcastsModule } from 'src/podcasts/podcasts.module';
-import { DatabaseModule } from 'src/db/db.provider';
+import { PodcastsModule } from '../podcasts/podcasts.module';
+import { DatabaseModule } from '../db/db.provider';
 import Knex from 'knex';
 import knexConfig from '../knexfile';
 import { Model } from 'objection';

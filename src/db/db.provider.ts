@@ -2,8 +2,8 @@ import { Global, Module } from '@nestjs/common';
 import { knex } from 'knex';
 import { knexSnakeCaseMappers, Model } from 'objection';
 import { PodcastModel } from './models/Podcast.model';
-import { GenreModel } from 'src/db/models/Genre.model';
-import config from 'src/knexfile';
+import { GenreModel } from '../db/models/Genre.model';
+import config from '../knexfile';
 
 const knexConfig = config.development;
 
@@ -24,7 +24,7 @@ const providers = [
         ...knexSnakeCaseMappers(),
       });
 
-      Model.knex(knexInstance);  // Associate the knex instance with Objection's Model
+      Model.knex(knexInstance); // Associate the knex instance with Objection's Model
       return knexInstance;
     },
   },
