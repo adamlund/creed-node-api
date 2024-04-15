@@ -18,8 +18,16 @@ $ npm install
 $ make build    # docker compose up --build
 
 # In a second terminal...
-$ make migrate  # add tables & schema
-$ make data     # insert/update sample data
+$ make data     # add tables & sample data
+```
+
+Following this you can run `make stop` to close and `make start` to resume.
+```bash
+$ make stop
+```
+Resume with:
+```bash
+$ make start
 ```
 
 ## Query the API
@@ -39,6 +47,7 @@ Supported route params
 | region   | string   | no | us, uk, ca, au |
 
 See [swagger page](http://localhost:3000/api) for complete docs.
+A small subset of the listennotes podcasts data is included to test the route.
 
 ## Test
 
