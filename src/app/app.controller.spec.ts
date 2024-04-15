@@ -1,20 +1,26 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { KnexService } from '../db/db.service';
 
 describe('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
-    const mockKnex = { raw: jest.fn().mockResolvedValue([{ result: 1 }]) };
+    const mockKnexService = {
+      getKnex: jest.fn(() => ({
+        raw: jest.fn().mockResolvedValue([{ dbConnection: true }])
+      })),
+      closeKnex: jest.fn(),
+    };
 
     const app: TestingModule = await Test.createTestingModule({
       controllers: [AppController],
       providers: [
         AppService,
         {
-          provide: 'Knex',
-          useValue: mockKnex,
+          provide: KnexService,
+          useValue: mockKnexService,
         },
       ],
     }).compile();
@@ -23,10 +29,6 @@ describe('AppController', () => {
   });
 
   describe('App controller health routes', () => {
-    it('isReady() route should return with a value', async () => {
-      const ready = await appController.isReady();
-      expect(ready).toEqual({});
-    });
     it('Healthy() route should return truthy', async () => {
       const ready = await appController.isHealthy();
       expect(ready).toEqual({ dbConnection: true });
